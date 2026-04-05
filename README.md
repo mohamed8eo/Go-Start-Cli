@@ -152,7 +152,8 @@ gostart init my-worker --framework None --database None --sql None
 ```
 
 ### Search and install packages
-![[Pasted image 20260405164132.png]]
+<img width="1809" height="931" alt="image" src="https://github.com/user-attachments/assets/335ed0c4-0bef-4f3a-9b9f-856b0f8cd706" />
+
 ---
 
 ## Contributing
