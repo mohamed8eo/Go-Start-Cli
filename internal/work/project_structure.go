@@ -63,6 +63,10 @@ import (
 func main() {
 	r := gin.Default()
 
+	r.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Server is running! Visit /health for status")
+	})
+
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status": "healthy",
@@ -93,6 +97,10 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Server is running! Visit /health for status")
+	})
+
 	e.GET("/health", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, map[string]string{
 			"status": "healthy",
@@ -117,6 +125,10 @@ import (
 
 func main() {
 	app := fiber.New()
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Server is running! Visit /health for status")
+	})
 
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
@@ -148,6 +160,11 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
+	r.Get("/", func(w http.ResponseWriter, req *http.Request) {
+		w.Header().Set("Content-Type", "text/plain")
+		w.Write([]byte("Server is running! Visit /health for status"))
+	})
+
 	r.Get("/health", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.Write([]byte("{\"status\":\"healthy\"}"))
@@ -171,6 +188,11 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain")
+		w.Write([]byte("Server is running! Visit /health for status"))
+	})
 
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

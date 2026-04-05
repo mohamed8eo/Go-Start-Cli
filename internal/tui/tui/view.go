@@ -114,10 +114,11 @@ func (m Model) View() tea.View {
 		context,
 	)
 
-	// Vertical sizing
+	// Vertical sizing - account for app padding (2) + borders (2) = 4
+	appPadding := 4
 	headerH := lipgloss.Height(header)
 	footerH := lipgloss.Height(footer)
-	bodyH := m.height - headerH - footerH - 2
+	bodyH := m.height - headerH - footerH - appPadding
 	if bodyH < 0 {
 		bodyH = 0
 	}
